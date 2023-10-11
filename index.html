@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Julefrokost Dato Afstemning</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .date { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Julefrokost Dato Afstemning</h1>
+    <p>Vælg den dato, du foretrækker for julefrokosten:</p>
+
+    <div id="dates"></div>
+
+    <button onclick="getMostVoted()">Vis mest stemte dato</button>
+    <p id="result"></p>
+
+    <script>
+        const dates = ["25. december", "26. december", "27. december", "28. december", "29. december", "30. december"];
+        const votes = {};
+
+        dates.forEach(date => {
+            votes[date] = 0;
+            document.getElementById('dates').innerHTML += `<div class="date"><input type="radio" name="date" value="${date}"> ${date}</div>`;
+        });
+
+        function getMostVoted() {
+            const selectedDate = document.querySelector('input[name="date"]:checked').value;
+            votes[selectedDate]++;
+            const mostVotedDate = Object.keys(votes).reduce((a, b) => votes[a] > votes[b] ? a : b);
+            document.getElementById('result').textContent = `Den mest stemte dato er: ${mostVotedDate}`;
+        }
+    </script>
+</body>
+</html>
